@@ -1,0 +1,7 @@
+# hms-project/.gitignore
+node_modules/
+.env
+.DS_Store
+dist/
+build/
+*.log
