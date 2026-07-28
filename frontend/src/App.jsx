@@ -1,10 +1,31 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './routes/ProtectedRoute';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
+import Unauthorized from './pages/Unauthorized';
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <h1 className="text-3xl font-bold text-blue-700">
-        HMS Frontend — Setup Successful
-      </h1>
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

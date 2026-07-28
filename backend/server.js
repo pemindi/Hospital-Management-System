@@ -20,6 +20,8 @@ app.get('/api/health', (req, res) => {
 // Routes will be added here as we build each module
 // app.use('/api/auth', require('./routes/authRoutes'));
 
+app.use('/api/auth', require('./routes/authRoutes'));
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
