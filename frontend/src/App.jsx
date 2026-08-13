@@ -8,6 +8,10 @@ import Unauthorized from './pages/Unauthorized';
 import PatientList from './pages/PatientList';
 import PatientForm from './pages/PatientForm';
 import PatientDetail from './pages/PatientDetail';
+import DoctorList from './pages/DoctorList';
+import DoctorForm from './pages/DoctorForm';
+import DoctorDetail from './pages/DoctorDetail';
+import DepartmentList from './pages/DepartmentList';
 
 function App() {
   return (
@@ -55,6 +59,46 @@ function App() {
             element={
               <ProtectedRoute>
                 <PatientDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/departments"
+            element={
+              <ProtectedRoute>
+                <DepartmentList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/doctors"
+            element={
+              <ProtectedRoute>
+                <DoctorList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/doctors/new"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <DoctorForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/doctors/:id/edit"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <DoctorForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/doctors/:id"
+            element={
+              <ProtectedRoute>
+                <DoctorDetail />
               </ProtectedRoute>
             }
           />
