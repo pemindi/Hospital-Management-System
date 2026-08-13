@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
@@ -14,13 +15,21 @@ const Dashboard = () => {
           Logout
         </button>
       </div>
-      <div className="bg-white p-6 rounded-lg shadow">
+      <div className="bg-white p-6 rounded-lg shadow mb-4">
         <p>
           Welcome, <strong>{user?.name}</strong>
         </p>
         <p>
           Role: <strong>{user?.role}</strong>
         </p>
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <Link
+          to="/patients"
+          className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700"
+        >
+          Patients
+        </Link>
       </div>
     </div>
   );

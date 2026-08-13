@@ -5,6 +5,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Unauthorized from './pages/Unauthorized';
+import PatientList from './pages/PatientList';
+import PatientForm from './pages/PatientForm';
+import PatientDetail from './pages/PatientDetail';
 
 function App() {
   return (
@@ -20,6 +23,38 @@ function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/patients"
+            element={
+              <ProtectedRoute>
+                <PatientList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/patients/new"
+            element={
+              <ProtectedRoute allowedRoles={['admin', 'receptionist']}>
+                <PatientForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/patients/:id/edit"
+            element={
+              <ProtectedRoute allowedRoles={['admin', 'receptionist', 'doctor', 'nurse']}>
+                <PatientForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/patients/:id"
+            element={
+              <ProtectedRoute>
+                <PatientDetail />
               </ProtectedRoute>
             }
           />
