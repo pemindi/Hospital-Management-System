@@ -39,6 +39,9 @@ const Dashboard = () => {
         className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">
         Departments
         </Link>
+        <Link to="/appointments" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">
+        Appointments
+        </Link>
       </div>
     </div>
   );

@@ -12,6 +12,8 @@ import DoctorList from './pages/DoctorList';
 import DoctorForm from './pages/DoctorForm';
 import DoctorDetail from './pages/DoctorDetail';
 import DepartmentList from './pages/DepartmentList';
+import AppointmentList from './pages/AppointmentList';
+import AppointmentForm from './pages/AppointmentForm';
 
 function App() {
   return (
@@ -99,6 +101,30 @@ function App() {
             element={
               <ProtectedRoute>
                 <DoctorDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/appointments"
+            element={
+              <ProtectedRoute>
+                <AppointmentList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/appointments/new"
+            element={
+              <ProtectedRoute allowedRoles={['admin', 'receptionist']}>
+                <AppointmentForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/appointments/:id/reschedule"
+            element={
+              <ProtectedRoute allowedRoles={['admin', 'receptionist']}>
+                <AppointmentForm />
               </ProtectedRoute>
             }
           />
