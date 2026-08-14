@@ -14,6 +14,12 @@ import DoctorDetail from './pages/DoctorDetail';
 import DepartmentList from './pages/DepartmentList';
 import AppointmentList from './pages/AppointmentList';
 import AppointmentForm from './pages/AppointmentForm';
+import MedicalRecordForm from './pages/MedicalRecordForm';
+import PatientHistory from './pages/PatientHistory';
+import InvoiceList from './pages/InvoiceList';
+import InvoiceForm from './pages/InvoiceForm';
+import InvoiceDetail from './pages/InvoiceDetail';
+
 
 function App() {
   return (
@@ -128,6 +134,46 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/patients/:patientId/history"
+            element={
+              <ProtectedRoute>
+                <PatientHistory />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/patients/:patientId/history/new"
+            element={
+              <ProtectedRoute allowedRoles={['admin', 'doctor']}>
+                <MedicalRecordForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/invoices"
+             element={
+              <ProtectedRoute>
+                <InvoiceList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/invoices/new"
+             element={
+              <ProtectedRoute allowedRoles={['admin', 'receptionist', 'accountant']}>
+                <InvoiceForm />
+              </ProtectedRoute>
+            }
+            />
+          <Route
+            path="/invoices/:id"
+             element={
+              <ProtectedRoute>
+                <InvoiceDetail />
+              </ProtectedRoute>
+            }
+            />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

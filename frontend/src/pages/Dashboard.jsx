@@ -23,26 +23,13 @@ const Dashboard = () => {
           Role: <strong>{user?.role}</strong>
         </p>
       </div>
-      <div className="grid grid-cols-3 gap-4">
-        <Link
-        to="/patients"
-        className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">
-        Patients
-       </Link>
-       <Link
-        to="/doctors"
-        className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">
-        Doctors
-       </Link>
-       <Link
-        to="/departments"
-        className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">
-        Departments
-        </Link>
-        <Link to="/appointments" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">
-        Appointments
-        </Link>
-      </div>
+      <div className="grid grid-cols-5 gap-4">
+         <Link to="/patients" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Patients</Link>
+         <Link to="/doctors" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Doctors</Link>
+         <Link to="/departments" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Departments</Link>
+         <Link to="/appointments" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Appointments</Link>
+         <Link to="/invoices" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Billing</Link>
+</div>
     </div>
   );
 };
