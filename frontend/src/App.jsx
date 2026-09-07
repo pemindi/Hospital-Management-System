@@ -19,6 +19,9 @@ import PatientHistory from './pages/PatientHistory';
 import InvoiceList from './pages/InvoiceList';
 import InvoiceForm from './pages/InvoiceForm';
 import InvoiceDetail from './pages/InvoiceDetail';
+import LabTestList from './pages/LabTestList';
+import LabTestForm from './pages/LabTestForm';
+import LabTestDetail from './pages/LabTestDetail';
 
 
 function App() {
@@ -174,6 +177,9 @@ function App() {
               </ProtectedRoute>
             }
             />
+            <Route path="/lab-tests" element={<ProtectedRoute><LabTestList /></ProtectedRoute>} />
+            <Route path="/lab-tests/new" element={<ProtectedRoute allowedRoles={['admin', 'doctor']}><LabTestForm /></ProtectedRoute>} />
+            <Route path="/lab-tests/:id" element={<ProtectedRoute><LabTestDetail /></ProtectedRoute>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
