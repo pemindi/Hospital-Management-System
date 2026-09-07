@@ -29,6 +29,9 @@ const Dashboard = () => {
          <Link to="/departments" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Departments</Link>
          <Link to="/appointments" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Appointments</Link>
          <Link to="/invoices" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Billing</Link>
+         <Link to="/lab-tests" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Lab Tests</Link>
+         <Link to="/medicines" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Medicines</Link>
+         <Link to="/dispense" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Dispense</Link>
 </div>
     </div>
   );

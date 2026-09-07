@@ -24,24 +24,50 @@ const PatientDetail = () => {
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-blue-700">
-           {patient.firstName} {patient.lastName}
+            {patient.firstName} {patient.lastName}
           </h1>
+
           <div className="flex gap-2">
-          <Link
-          to={`/patients/${patient._id}/history`}
-          className="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800">Medical History</Link>
-          <Link to="/patients" className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">Back</Link>
+            <Link
+              to={`/patients/${patient._id}/history`}
+              className="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800"
+            >
+              Medical History
+            </Link>
+
+            <Link
+              to={`/patients/${patient._id}/lab-tests`}
+              className="bg-teal-700 text-white px-4 py-2 rounded hover:bg-teal-800"
+            >
+              Lab Tests
+            </Link>
+
+            <Link
+              to="/patients"
+              className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+            >
+              Back
+            </Link>
           </div>
         </div>
 
-        <Row label="Date of Birth" value={patient.dateOfBirth?.split('T')[0]} />
+        <Row
+          label="Date of Birth"
+          value={patient.dateOfBirth?.split('T')[0]}
+        />
         <Row label="Gender" value={patient.gender} />
         <Row label="Phone" value={patient.phone} />
         <Row label="Email" value={patient.email} />
         <Row label="Address" value={patient.address} />
         <Row label="Blood Group" value={patient.bloodGroup} />
-        <Row label="Emergency Contact" value={patient.emergencyContactName} />
-        <Row label="Emergency Phone" value={patient.emergencyContactPhone} />
+        <Row
+          label="Emergency Contact"
+          value={patient.emergencyContactName}
+        />
+        <Row
+          label="Emergency Phone"
+          value={patient.emergencyContactPhone}
+        />
         <Row label="Allergies" value={patient.allergies} />
       </div>
     </div>

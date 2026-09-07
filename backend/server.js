@@ -28,6 +28,8 @@ app.use('/api/appointments', require('./routes/appointmentRoutes'));
 app.use('/api/medical-records', require('./routes/medicalRecordRoutes'));
 app.use('/api/invoices', require('./routes/invoiceRoutes'));
 app.use('/api/lab-tests', require('./routes/labTestRoutes'));
+app.use('/api/medicines', require('./routes/medicineRoutes'));
+app.use('/api/dispense', require('./routes/dispenseRoutes'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
