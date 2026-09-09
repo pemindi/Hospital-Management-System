@@ -26,6 +26,14 @@ import MedicineList from './pages/MedicineList';
 import MedicineForm from './pages/MedicineForm';
 import DispenseForm from './pages/DispenseForm';
 import PatientLabTests from './pages/PatientLabTests';
+import EmployeeList from './pages/EmployeeList';
+import EmployeeForm from './pages/EmployeeForm';
+import EmployeeDetail from './pages/EmployeeDetail';
+import AttendanceMarking from './pages/AttendanceMarking';
+import Reports from './pages/Reports';
+import ChangePassword from './pages/ChangePassword';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 
 function App() {
@@ -63,6 +71,16 @@ function App() {
           <Route path="/medicines/:id/edit" element={<ProtectedRoute allowedRoles={['admin', 'pharmacist']}><MedicineForm /></ProtectedRoute>} />
           <Route path="/patients/:patientId/lab-tests" element={<ProtectedRoute><PatientLabTests /></ProtectedRoute>} />
           <Route path="/dispense" element={<ProtectedRoute allowedRoles={['admin', 'pharmacist']}><DispenseForm /></ProtectedRoute>} />
+          <Route path="/employees" element={<ProtectedRoute><EmployeeList /></ProtectedRoute>} />
+          <Route path="/employees/new" element={<ProtectedRoute allowedRoles={['admin']}><EmployeeForm /></ProtectedRoute>} />
+          <Route path="/employees/:id/edit" element={<ProtectedRoute allowedRoles={['admin']}><EmployeeForm /></ProtectedRoute>} />
+          <Route path="/employees/:id" element={<ProtectedRoute><EmployeeDetail /></ProtectedRoute>} />
+          <Route path="/attendance" element={<ProtectedRoute allowedRoles={['admin']}><AttendanceMarking /></ProtectedRoute>} />
+          <Route path="/reports" element={<ProtectedRoute allowedRoles={['admin']}><Reports /></ProtectedRoute>} />
+          <Route path="/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+
         </Routes>
       </BrowserRouter>
     </AuthProvider>

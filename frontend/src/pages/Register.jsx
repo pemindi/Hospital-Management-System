@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { registerUser } from '../services/authService';
+import { GoogleLogin } from '@react-oauth/google';
+import { registerUser, googleLogin } from '../services/authService';
 import { useAuth } from '../context/AuthContext';
 
 const ROLES = [
@@ -44,6 +45,24 @@ const Register = () => {
     }
   };
 
+  const handleGoogleSuccess = async (credentialResponse) => {
+    setError('');
+    setLoading(true);
+    try {
+      const data = await googleLogin(credentialResponse.credential);
+      login(data.token, data.user);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Google sign-in failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleError = () => {
+    setError('Google sign-in was cancelled or failed. Please try again.');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form
@@ -59,6 +78,24 @@ const Register = () => {
             {error}
           </div>
         )}
+
+        {/* Quick sign-up with Google at the top */}
+        <div className="flex justify-center mb-4">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            useOneTap={false}
+            text="signup_with"
+            shape="rectangular"
+            width="100%"
+          />
+        </div>
+
+        <div className="flex items-center mb-4">
+          <hr className="flex-grow border-gray-300" />
+          <span className="mx-3 text-sm text-gray-400">or register manually</span>
+          <hr className="flex-grow border-gray-300" />
+        </div>
 
         <label className="block text-sm font-medium mb-1">Name</label>
         <input

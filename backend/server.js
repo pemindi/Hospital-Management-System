@@ -30,6 +30,13 @@ app.use('/api/invoices', require('./routes/invoiceRoutes'));
 app.use('/api/lab-tests', require('./routes/labTestRoutes'));
 app.use('/api/medicines', require('./routes/medicineRoutes'));
 app.use('/api/dispense', require('./routes/dispenseRoutes'));
+app.use('/api/employees', require('./routes/employeeRoutes'));
+app.use('/api/attendance', require('./routes/attendanceRoutes'));
+app.use('/api/leaves', require('./routes/leaveRoutes'));
+app.use('/api/reports', require('./routes/reportRoutes'));
+app.use('/api/users', require('./routes/userRoutes'));
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

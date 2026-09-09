@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { loginUser } from '../services/authService';
+import { GoogleLogin } from '@react-oauth/google';
+import { loginUser, googleLogin } from '../services/authService';
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
@@ -24,6 +25,24 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    setError('');
+    setLoading(true);
+    try {
+      const data = await googleLogin(credentialResponse.credential);
+      login(data.token, data.user);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Google sign-in failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleError = () => {
+    setError('Google sign-in was cancelled or failed. Please try again.');
   };
 
   return (
@@ -59,6 +78,9 @@ const Login = () => {
           required
           className="w-full border rounded px-3 py-2 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+        <div className="text-right mb-4">
+          <Link to="/forgot-password" className="text-sm text-blue-700 underline">Forgot password?</Link>
+        </div>
 
         <button
           type="submit"
@@ -67,6 +89,23 @@ const Login = () => {
         >
           {loading ? 'Logging in...' : 'Login'}
         </button>
+
+        <div className="flex items-center my-4">
+          <hr className="flex-grow border-gray-300" />
+          <span className="mx-3 text-sm text-gray-400">or</span>
+          <hr className="flex-grow border-gray-300" />
+        </div>
+
+        <div className="flex justify-center">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            useOneTap={false}
+            text="signin_with"
+            shape="rectangular"
+            width="100%"
+          />
+        </div>
 
         <p className="text-sm text-center mt-4">
           No account?{' '}

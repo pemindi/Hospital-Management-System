@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getLabTestById, enterResult } from '../services/labTestService';
+import { getLabTestById, enterResult, removeAttachment } from '../services/labTestService';
 import { useAuth } from '../context/AuthContext';
 
 const LabTestDetail = () => {
@@ -99,7 +99,7 @@ const LabTestDetail = () => {
 
                 <div className="space-y-2">
                   {test.attachments.map((att, index) => (
-                    <div key={index}>
+                    <div key={index} className="flex items-center gap-3">
                       <a
                         href={att.signedUrl}
                         target="_blank"
@@ -108,6 +108,18 @@ const LabTestDetail = () => {
                       >
                         📄 {att.originalName}
                       </a>
+                      {canEnterResult && (
+                        <button
+                          onClick={async () => {
+                            if (!window.confirm('Delete this attachment?')) return;
+                            await removeAttachment(test._id, index);
+                            fetchTest();
+                          }}
+                          className="text-red-600 text-sm"
+                        >
+                          Remove
+                        </button>
+                      )}
                     </div>
                   ))}
                 </div>
