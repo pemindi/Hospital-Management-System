@@ -35,6 +35,7 @@ app.use('/api/attendance', require('./routes/attendanceRoutes'));
 app.use('/api/leaves', require('./routes/leaveRoutes'));
 app.use('/api/reports', require('./routes/reportRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/audit', require('./routes/auditRoutes'));
 
 
 

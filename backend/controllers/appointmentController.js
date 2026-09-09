@@ -1,6 +1,7 @@
 const Appointment = require('../models/Appointment');
 const Doctor = require('../models/Doctor');
 const { isWithinDoctorSchedule, hasConflict } = require('../utils/appointmentValidation');
+const { createAudit } = require('../utils/audit');
 
 // @desc    Book a new appointment
 // @route   POST /api/appointments
@@ -42,6 +43,8 @@ exports.createAppointment = async (req, res) => {
       { path: 'patient', select: 'firstName lastName phone' },
       { path: 'doctor', select: 'firstName lastName specialization' },
     ]);
+
+    createAudit(req.user.id, 'create', 'appointment', appointment._id.toString(), { patient, doctor, date: dateObj });
 
     res.status(201).json({ appointment: populated });
   } catch (error) {
@@ -132,6 +135,7 @@ exports.rescheduleAppointment = async (req, res) => {
     appointment.endTime = endTime;
     appointment.status = 'scheduled'; // un-cancel if it was cancelled, reset to active
     await appointment.save();
+    createAudit(req.user.id, 'reschedule', 'appointment', appointment._id.toString(), { date: dateObj, startTime, endTime });
 
     res.json({ appointment });
   } catch (error) {
@@ -161,6 +165,7 @@ exports.updateStatus = async (req, res) => {
     if (!appointment) {
       return res.status(404).json({ message: 'Appointment not found' });
     }
+    createAudit(req.user.id, 'status_update', 'appointment', appointment._id.toString(), { status });
 
     res.json({ appointment });
   } catch (error) {

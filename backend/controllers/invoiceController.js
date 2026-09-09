@@ -1,4 +1,5 @@
 const Invoice = require('../models/Invoice');
+const { createAudit } = require('../utils/audit');
 
 // @desc    Generate a new invoice
 // @route   POST /api/invoices
@@ -15,6 +16,7 @@ exports.createInvoice = async (req, res) => {
     });
 
     const populated = await invoice.populate('patient', 'firstName lastName phone');
+    createAudit(req.user.id, 'create', 'invoice', invoice._id.toString(), { totalAmount: invoice.totalAmount });
     res.status(201).json({ invoice: populated });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -77,6 +79,7 @@ exports.recordPayment = async (req, res) => {
     await invoice.save(); // triggers the pre-save hook to recalculate paymentStatus
 
     const populated = await invoice.populate('patient', 'firstName lastName phone');
+    createAudit(req.user.id, 'record_payment', 'invoice', invoice._id.toString(), { amount, paymentMethod });
     res.json({ invoice: populated });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });

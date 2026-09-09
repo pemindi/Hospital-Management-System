@@ -75,6 +75,10 @@ const Dashboard = () => {
          <Link to="/employees" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Staff</Link>
          <Link to="/reports" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Reports</Link>
 
+         {user?.role === 'admin' && (
+           <Link to="/audit" className="bg-white p-6 rounded-lg shadow hover:shadow-md text-center font-medium text-blue-700">Audit Log</Link>
+         )}
+
       </div>
     </div>
   );

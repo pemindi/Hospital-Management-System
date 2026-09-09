@@ -1,4 +1,5 @@
 const Patient = require('../models/Patient');
+const { createAudit } = require('../utils/audit');
 
 // @desc    Register a new patient
 // @route   POST /api/patients
@@ -9,6 +10,8 @@ exports.createPatient = async (req, res) => {
       ...req.body,
       registeredBy: req.user.id,
     });
+    // audit
+    createAudit(req.user.id, 'create', 'patient', patient._id.toString(), { patient: { firstName: patient.firstName, lastName: patient.lastName } });
     res.status(201).json({ patient });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -77,6 +80,7 @@ exports.updatePatient = async (req, res) => {
     if (!patient) {
       return res.status(404).json({ message: 'Patient not found' });
     }
+    createAudit(req.user.id, 'update', 'patient', patient._id.toString(), { updates: req.body });
     res.json({ patient });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -96,6 +100,7 @@ exports.deletePatient = async (req, res) => {
     if (!patient) {
       return res.status(404).json({ message: 'Patient not found' });
     }
+    createAudit(req.user.id, 'deactivate', 'patient', patient._id.toString(), {});
     res.json({ message: 'Patient deactivated successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
