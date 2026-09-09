@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Layout from '../components/Layout';
 
 // Usage: <ProtectedRoute allowedRoles={['admin', 'doctor']}><Page /></ProtectedRoute>
 // Omit allowedRoles to just require "logged in", regardless of role.
@@ -16,7 +17,8 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
     return <Navigate to="/unauthorized" replace />;
   }
 
-  return children;
+  // wrap protected pages in the app layout
+  return <Layout>{children}</Layout>;
 };
 
 export default ProtectedRoute;

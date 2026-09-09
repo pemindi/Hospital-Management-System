@@ -1,3 +1,68 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-heading text-ink;
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-brand-600 text-white hover:bg-brand-700;
+  }
+  .btn-secondary {
+    @apply btn bg-white text-ink border border-line hover:bg-paper;
+  }
+  .btn-danger {
+    @apply btn bg-danger-500 text-white hover:bg-danger-700;
+  }
+
+  /* Cards — hairline border instead of soft shadow-on-everything */
+  .card {
+    @apply bg-white border border-line rounded-lg;
+  }
+  .card-pad {
+    @apply card p-6;
+  }
+
+  /* Inputs */
+  .field-label {
+    @apply block text-sm font-medium text-ink/80 mb-1;
+  }
+  .field-input {
+    @apply w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-brand-400;
+  }
+
+  /* Status badges — color + label always together, never color alone */
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium;
+  }
+  .badge-success { @apply badge bg-success-50 text-success-700; }
+  .badge-warning { @apply badge bg-warning-50 text-warning-700; }
+  .badge-danger  { @apply badge bg-danger-50 text-danger-700; }
+  .badge-info    { @apply badge bg-brand-50 text-brand-700; }
+  .badge-neutral { @apply badge bg-line/60 text-ink/70; }
+
+  /* Tables */
+  .table-clean {
+    @apply w-full text-left text-sm;
+  }
+  .table-clean thead {
+    @apply border-b border-line text-ink/60 text-xs uppercase tracking-wide;
+  }
+  .table-clean th {
+    @apply py-2.5 px-3 font-medium;
+  }
+  .table-clean td {
+    @apply py-3 px-3 border-b border-line/70;
+  }
+}
